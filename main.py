@@ -2,9 +2,9 @@ import ui
 import nutritionix
 import api_controller 
 
-# appId=b3203af1
-# 1
-# &appKey=2b9b96bfe1278528cc9717ce7055a037
+# appId = b3203af1
+
+# &appKey = 2b9b96bfe1278528cc9717ce7055a037
 def main():
     while True:
         try:
