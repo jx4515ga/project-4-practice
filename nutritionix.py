@@ -3,22 +3,22 @@ import os
 from pprint import pprint
 import logging
 import nutrition_cache
-import time
+#import time
 
-cached_time = 300
+##cached_time = 300
 
 key = os.environ.get('DRINK_KEY')
 id = os.environ.get('DRINK_ID')
 
 url = f'https://api.nutritionix.com/v2/search'
 
-#def params_unique_conbination(baseurl, params, private_key=key, private_id=id):
+#def params_unique_combination(baseurl, params, private_key=key):
     #alphabetized_keys = sorted(params_d.keys{})
-    #res = []
+    ##res = []
     #for k in alphabetized_keys:
-        #if k not in private_keys:
-            #res.append("{}".format(k, params_d[k]))
-    #return baseurl + "_",join()
+        #if k not in private_key:
+            #res.append("{} {}".format(k, params_d[k]))
+    #return baseurl + "_".join(res)
 
 
 
@@ -28,34 +28,32 @@ def get_drink(search_term):
     try:
         query = {'q': search_term, 'limit': '1', 'offset': '0' , 'appId': id, 'appKey': key }
         data = nutritionix_api_call(query)
+        #print(data)
         results = data['results']
-        try:
-            results = mydict['results']
-        except:
-            results = default_results
+        
+        
         
 
         if results:
-            result = results [0]
-            beverage = result['item_name']
+            result = results[0]
+            print(result)
+            beverage = result['item_name']   
             return beverage
         else:
             print('Sorry, Product not found in the database. Please Try Again.')
             return None
             
             
-    except Exception as e:
-        logging.exception(f'Error occured while calling the Nutritionix API. {e} ')
+    except Exception as error:
+        logging.exception(f'Error occured while calling the Nutritionix API. {error} ')
 
-    except KeyError as e:
-        print(f"Key {results}not found")
-        
+  
     
 
 
 def nutritionix_api_call(query):
     return requests.get(url, params=query).json()
-    now = time.time()
+    #now = time.time()
 
 
 
